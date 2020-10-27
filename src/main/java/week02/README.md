@@ -1,4 +1,4 @@
-##GC日志打印
+## GC日志打印
 * 串行GC代码：
 
 使用512m内存：java -XX:+UseSerialGC -Xms512m -Xmx512m -Xloggc:serial.512m.gc.demo.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps GCLogAnalysis
