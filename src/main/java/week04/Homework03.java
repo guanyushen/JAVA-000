@@ -1,5 +1,7 @@
 package week04;
 
+import java.util.concurrent.*;
+
 /**
  * 本周作业：（必做）思考有多少种方式，在main函数启动一个新线程或线程池，
  * 异步运行一个方法，拿到这个方法的返回值后，退出主线程？
@@ -35,3 +37,83 @@ public class Homework03 {
         return fibo(a-1) + fibo(a-2);
     }
 }
+
+//通过join方法实现
+class Method01 {
+
+    public static void main(String[] args) {
+
+        long start=System.currentTimeMillis();
+
+        final int[] result = new int[1];
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                result[0] = sum();
+            }
+        });
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("异步计算结果为：" + result[0]);
+        System.out.println("使用时间："+ (System.currentTimeMillis()-start) + " ms");
+        // 然后退出main线程
+
+    }
+
+    private static int sum() {
+        return fibo(36);
+    }
+
+    private static int fibo(int a) {
+        if ( a < 2)
+            return 1;
+        return fibo(a-1) + fibo(a-2);
+    }
+}
+
+//通过线程池实现
+class Method02 {
+
+    public static void main(String[] args) {
+
+        long start=System.currentTimeMillis();
+
+        ExecutorService executorService = Executors.newFixedThreadPool(1);
+        Future<Object> future = executorService.submit(new Callable<Object>() {
+            @Override
+            public Object call() throws Exception {
+                return sum();
+            }
+        });
+
+        int result = 0;
+        try {
+            result = (int) future.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("异步计算结果为：" + result);
+        System.out.println("使用时间："+ (System.currentTimeMillis()-start) + " ms");
+        // 然后退出main线程
+
+    }
+
+    private static int sum() {
+        return fibo(36);
+    }
+
+    private static int fibo(int a) {
+        if ( a < 2)
+            return 1;
+        return fibo(a-1) + fibo(a-2);
+    }
+}
+
