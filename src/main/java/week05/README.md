@@ -7,3 +7,7 @@
    spring注解自动注入
    spring包扫描注入
 ```
+
+```
+   在UserLogic中使用Statement方式,使用事务，PrepareStatement方式，批处理方式
+```
