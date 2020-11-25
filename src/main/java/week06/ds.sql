@@ -60,7 +60,7 @@ CREATE TABLE `order_info`  (
   `pay_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '付款时间', 
   `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间', 
   `update_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '更新时间',
-  PRIMARY KEY (`good_id`) USING BTREE 
+  PRIMARY KEY (`order_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4;
  
 
