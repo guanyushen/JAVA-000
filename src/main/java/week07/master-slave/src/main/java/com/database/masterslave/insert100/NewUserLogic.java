@@ -1,4 +1,4 @@
-package week07.database;
+package com.database.masterslave.insert100;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
