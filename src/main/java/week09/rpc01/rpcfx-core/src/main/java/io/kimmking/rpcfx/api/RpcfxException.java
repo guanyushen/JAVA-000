@@ -26,6 +26,10 @@ public class RpcfxException extends RuntimeException {
         super(errMsg);
     }
 
+    public RpcfxException(String errMsg, Throwable cas){
+        super(errMsg,cas);
+    }
+
     public RpcfxException(String errCode,String errMsg, Object data){
         super(errMsg);
         this.errCode = errCode;
